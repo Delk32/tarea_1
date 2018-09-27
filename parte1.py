@@ -57,3 +57,15 @@ plt.title("Gráfico comparación valor estimado con nominal v/s $\delta$x en flo
 _ = plt.xticks(delta[::2])
 plt.legend()
 plt.show()
+
+dif_m_simple = np.fabs(m_simple - m_simple_64)
+dif_m_h4 = np.fabs(m_h4 - m_h4_64)
+plt.plot(delta_64, dif_m_h4, label="diff para el método de O($h^4$)")
+plt.plot(delta_64, dif_m_simple, label="diff para el método de O(h)")
+plt.yscale('log')
+plt.xscale('log')
+plt.xlabel("$\delta$x", fontsize="15")
+plt.title("Gráfico diferencia de los resultados con float32 y float64")
+plt.legend()
+plt.show()
+
