@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math
 n = 15
-x = 1.812
+x = 1.705
 delta = np.logspace(-1, -15, n , dtype="float32" )
 
 m_simple = np.arange(0, n, dtype="float32")
