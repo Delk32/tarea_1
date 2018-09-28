@@ -31,7 +31,7 @@ plt.show()
 
 
 
-x = 1.812
+x = 1.705
 delta_64 = np.logspace(-1, -15, n , dtype="float64" )
 
 m_simple_64 = np.arange(0, n, dtype="float64")
