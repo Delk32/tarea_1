@@ -20,7 +20,7 @@ def simpson_metod(x1,x2,n):
     return (paso/3)*(func_planck(x1+(paso/2))+2*sum_impar+4*sum_par+func_planck(x2-(paso/2)))
 
 I_planck=0
-n=5
+n=6
 while np.fabs(simpson_metod(0,np.pi/2,n)-(np.pi**4/15)) > tolerancia:
     I_planck=simpson_metod(0,np.pi/2,n)
     n+=10
@@ -56,7 +56,9 @@ h= 6.626e-34
 kb=1.38e-23
 Tk=(((c**2)*(h**3)*I_trapecio)/(2*(kb**4)*I_planck))**(1/4)
 def B_v(t, frec):
-    return((2*h*frec**3)/c**2)/(np.exp((h*frec)/kb*t)-1)
+    arrib=(2*h*frec**3)/c**2
+    es = np.exp((h*frec)/(kb*t))
+    return arrib/(es-1)
 B_275=[]
 B_exp=[]
 k=0
@@ -65,11 +67,11 @@ while k < len(frecuencia) :
     B_exp.append(B_v(Tk,frecuencia[k]))
     k += 1
 fig, ax =plt.subplots()
-ax.errorbar(frecuencia, espectro, yerr=incertidumbre, label="FIRAS")
+#ax.errorbar(frecuencia, espectro, yerr=incertidumbre, label="FIRAS")
 plt.xlabel("Hz")
-plt.ylabel("$\\frac{KJy}{sr}$")
-plt.title("Gráfico espectro medido por el FIRAS[$\\frac{KJy}{sr}$] v/s frecuencia[Hz]")
-plt.plot(frecuencia, B_275, label="2725 K")
-plt.plot(frecuencia, B_exp, label="Tk")
+plt.ylabel("$\\frac{KJy}{sr}$", fontsize='15')
+plt.title("Gráfico espectro[$\\frac{KJy}{sr}$] v/s frecuencia[Hz]")
+plt.plot(frecuencia, B_275, label="Espectro con T=2725 K")
+plt.plot(frecuencia, B_exp, label="Espectro con temperatura calculada")
 plt.legend()
 plt.show()

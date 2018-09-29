@@ -18,6 +18,6 @@ while k < len(data):
 fig, ax =plt.subplots()
 ax.errorbar(frecuencia, espectro, yerr=incertidumbre)
 plt.xlabel("Hz")
-plt.ylabel("$\\frac{KJy}{sr}$")
+plt.ylabel("$\\frac{KJy}{sr}$",fontsize='15')
 plt.title("Gráfico espectro medido por el FIRAS[$\\frac{KJy}{sr}$] v/s frecuencia[Hz]")
 plt.show()
