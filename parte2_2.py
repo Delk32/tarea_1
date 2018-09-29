@@ -29,11 +29,13 @@ data1=np.loadtxt("firas_monopole_spec_v1.txt")
 #se crean matrices con los datos del archivo
 frecuencia=[]
 espectro=[]
+incertidumbre=[]
 l=0
 while l < len(data1):
     # Se transforman las frecuencias a Hertz
-    frecuencia.append(data1[l][0]*100*3e8)
+    frecuencia.append(data1[l][0]*300)
     espectro.append(data1[l][1])
+    incertidumbre.append(data1[l][3])
     l += 1
 
 def trapecio(x1,x2,y1,y2):
@@ -52,4 +54,22 @@ while k < len(frecuencia)-1:
 c= 3e8
 h= 6.626e-34
 kb=1.38e-23
-Tk=(((c**2)*(h**3)*I_trapecio)*1e-20/(2*(kb**4)*I_planck))**(1/4)
+Tk=(((c**2)*(h**3)*I_trapecio)/(2*(kb**4)*I_planck))**(1/4)
+def B_v(t, frec):
+    return((2*h*frec**3)/c**2)/(np.exp((h*frec)/kb*t)-1)
+B_275=[]
+B_exp=[]
+k=0
+while k < len(frecuencia) :
+    B_275.append(B_v(2725,frecuencia[k]))
+    B_exp.append(B_v(Tk,frecuencia[k]))
+    k += 1
+fig, ax =plt.subplots()
+ax.errorbar(frecuencia, espectro, yerr=incertidumbre, label="FIRAS")
+plt.xlabel("Hz")
+plt.ylabel("$\\frac{KJy}{sr}$")
+plt.title("Gráfico espectro medido por el FIRAS[$\\frac{KJy}{sr}$] v/s frecuencia[Hz]")
+plt.plot(frecuencia, B_275, label="2725 K")
+plt.plot(frecuencia, B_exp, label="Tk")
+plt.legend()
+plt.show()
