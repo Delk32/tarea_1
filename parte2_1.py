@@ -18,25 +18,6 @@ while k < len(data):
 fig, ax =plt.subplots()
 ax.errorbar(frecuencia, espectro, yerr=incertidumbre)
 plt.xlabel("Hz")
-plt.ylabel("Espectro[$\\frac{KJy}{sr}$]")
-#plt.show()
-
-"""
-2.
-"""
-tolerancia=1e-60
-def func_planck(x):
-    return ((np.tan(x)**3)*(1+np.tan(x)**2))/(np.e**(np.tan(x))-1)
-def simpson_metod(x1,x2,n,func):
-    paso=(x2-x1)/(2*n)
-    sum_par=0
-    sum_impar=0
-    i = 1
-    while i < 2*n:
-
-        if i%2 == 0:
-            sum_par += func(x1+i*paso)
-        else:
-            sum_impar += func(x1+i*paso)
-        i += 1
-    return (paso/3)*(func(x1+(paso/2))+2*sum_impar+4*sum_par+func(x2-(paso/2)))
+plt.ylabel("$\\frac{KJy}{sr}$")
+plt.title("Gráfico espectro medido por el FIRAS[$\\frac{KJy}{sr}$] v/s frecuancia[Hz]")
+plt.show()
