@@ -4,7 +4,7 @@ import math
 
 tolerancia=1e-60
 def func_planck(x):
-    return ((np.tan(x)**3)*(1+np.tan(x)**2))/(np.e**(np.tan(x))-1)
+    return ((np.tan(x)**3)*(1+np.tan(x)**2))/(np.exp(np.tan(x))-1)
 def simpson_metod(x1,x2,n):
     paso=(x2-x1)/(2*n)
     sum_par=0
